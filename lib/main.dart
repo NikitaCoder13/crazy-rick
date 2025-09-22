@@ -1,4 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/screens/character_screen.dart';
+import 'package:my_app/screens/characters_screen.dart';
+import 'package:my_app/screens/episodes_screen.dart';
+import 'package:my_app/screens/home_screen.dart';
+
+final mockCharacters = [
+  Character(
+    id: 361,
+    name: "Toxic Rick",
+    status: "Dead",
+    species: "Humanoid",
+    type: "Rick's Toxic Side",
+    gender: "Male",
+    image: "https://rickandmortyapi.com/api/character/avatar/361.jpeg",
+    origin: Origin(
+      name: "Alien Spa",
+      url: "https://rickandmortyapi.com/api/location/64",
+    ),
+    location: Location(
+      name: "Earth",
+      url: "https://rickandmortyapi.com/api/location/20",
+    ),
+    episode: ["https://rickandmortyapi.com/api/episode/27"],
+  ),
+  Character(
+    id: 1,
+    name: "Rick Sanchez",
+    status: "Alive",
+    species: "Human",
+    type: "",
+    gender: "Male",
+    image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+    origin: Origin(
+      name: "Earth (C-137)",
+      url: "https://rickandmortyapi.com/api/location/1",
+    ),
+    location: Location(
+      name: "Citadel of Ricks",
+      url: "https://rickandmortyapi.com/api/location/3",
+    ),
+    episode: [
+      "https://rickandmortyapi.com/api/episode/1",
+      "https://rickandmortyapi.com/api/episode/2",
+      "https://rickandmortyapi.com/api/episode/3",
+    ],
+  ),
+  Character(
+    id: 2,
+    name: "Morty Smith",
+    status: "Alive",
+    species: "Human",
+    type: "",
+    gender: "Male",
+    image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
+    origin: Origin(name: "unknown", url: ""),
+    location: Location(
+      name: "Citadel of Ricks",
+      url: "https://rickandmortyapi.com/api/location/3",
+    ),
+    episode: [
+      "https://rickandmortyapi.com/api/episode/1",
+      "https://rickandmortyapi.com/api/episode/2",
+    ],
+  ),
+  Character(
+    id: 3,
+    name: "Summer Smith",
+    status: "Alive",
+    species: "Human",
+    type: "",
+    gender: "Female",
+    image: "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
+    origin: Origin(
+      name: "Earth (Replacement Dimension)",
+      url: "https://rickandmortyapi.com/api/location/20",
+    ),
+    location: Location(
+      name: "Earth (Replacement Dimension)",
+      url: "https://rickandmortyapi.com/api/location/20",
+    ),
+    episode: [
+      "https://rickandmortyapi.com/api/episode/6",
+      "https://rickandmortyapi.com/api/episode/7",
+    ],
+  ),
+];
 
 void main() {
   runApp(const MyApp());
@@ -13,56 +99,24 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         appBarTheme: AppBarTheme(backgroundColor: Colors.amber),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Colors.amber,
-        ),
-        scaffoldBackgroundColor: const Color.fromARGB(255, 24, 24, 24),
+        scaffoldBackgroundColor: Colors.white,
         colorSchemeSeed: Colors.amber,
-      ),
-      home: const MyHomePage(title: 'Crazy Rickkk!'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title), centerTitle: true),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        fontFamily: 'TinkoffSans',
+        textTheme: TextTheme(
+          bodyMedium: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+          labelSmall: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            color: Colors.grey,
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      routes: {
+        '/': (context) => HomeScreen(isAuthenticated: true),
+        '/characters': (context) => CharactersScreen(),
+        '/character': (context) => CharacterScreen(),
+        '/episodes': (context) => EpisodesScreen(),
+      },
     );
   }
 }
