@@ -23,4 +23,35 @@ class ApiService {
       throw Exception('Failed to load episodes');
     }
   }
+
+  static Future<Map<String, dynamic>> getEpisode(int id) async {
+    final response = await http.get(Uri.parse('$baseUrl/episode/$id'));
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load episode');
+    }
+  }
+
+  static Future<Map<String, dynamic>> getCharacter(int id) async {
+    final response = await http.get(Uri.parse('$baseUrl/character/$id'));
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load character');
+    }
+  }
+
+  static Future<List<dynamic>> getCharactersByIds(List<int> ids) async {
+    final idsString = ids.join(',');
+    final response = await http.get(Uri.parse('$baseUrl/character/$idsString'));
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load characters by ids');
+    }
+  }
 }

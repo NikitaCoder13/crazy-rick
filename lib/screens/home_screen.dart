@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/services/supabase_service.dart';
 
 class HomeScreen extends StatelessWidget {
   final bool isAuthenticated;
@@ -15,9 +16,16 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () async {
+              await SupabaseService.signOut();
+              Navigator.pushReplacementNamed(context, '/login');
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              // Навигация к экрану настроек
+              Navigator.pushNamed(context, '/settings');
             },
           ),
         ],
@@ -72,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                     title: "Избранное",
                     color: Colors.red,
                     onTap: () {
-                      // Переход к эпизодам
+                      Navigator.pushNamed(context, '/favorites');
                     },
                   ),
                 ],

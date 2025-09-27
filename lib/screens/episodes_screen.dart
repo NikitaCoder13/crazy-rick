@@ -48,7 +48,6 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
       setState(() {
         isLoading = false;
       });
-      // Обработка ошибки
     }
   }
 
@@ -80,16 +79,15 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
         .toList();
   }
 
-  void _onEpisodeTap(Episode episode) {
-    // Навигация к деталям эпизода
-    Navigator.of(context).pushNamed('/episode', arguments: episode);
+  void _onEpisodeTap(int episodeId) {
+    Navigator.of(context).pushNamed('/episode', arguments: episodeId);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Crazy Rickkk!'),
+        title: Text('Эпизоды'),
         centerTitle: true,
         actions: [
           IconButton(
@@ -116,7 +114,7 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
                       final episode = episodes[index];
                       return EpisodeCard(
                         episode: episode,
-                        onTap: () => _onEpisodeTap(episode),
+                        onTap: () => _onEpisodeTap(episode.id),
                       );
                     },
                   ),
