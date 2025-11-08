@@ -96,8 +96,10 @@ class CharacterDetailScreen extends StatelessWidget {
     switch (character.status.toLowerCase()) {
       case 'alive':
         statusColor = Colors.green;
+        break;
       case 'dead':
         statusColor = Colors.red;
+        break;
       default:
         statusColor = Colors.grey;
     }
