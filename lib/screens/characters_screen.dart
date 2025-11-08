@@ -18,7 +18,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
   bool isLoading = true;
   bool hasMore = true;
   int currentPage = 1;
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -123,7 +123,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
     } catch (e) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Ошибка: ${e.toString()}')));
+      ).showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));
     }
   }
 
@@ -131,8 +131,9 @@ class _CharactersScreenState extends State<CharactersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Персонажи'),
+        title: Text('Characters', style: TextStyle(color: Colors.indigo[900])),
         centerTitle: true,
+        backgroundColor: Colors.amber,
         actions: [
           IconButton(
             icon: Icon(Icons.logout),
@@ -149,7 +150,6 @@ class _CharactersScreenState extends State<CharactersScreen> {
           ),
         ],
       ),
-
       body: isLoading && characters.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : Column(
@@ -162,10 +162,8 @@ class _CharactersScreenState extends State<CharactersScreen> {
                       if (index == characters.length) {
                         return _buildLoader();
                       }
-
                       final character = characters[index];
                       final isFavorite = favoriteIds.contains(character.id);
-
                       return CharacterCard(
                         character: character,
                         isFavorite: isFavorite,
@@ -186,7 +184,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
       child: Center(
         child: hasMore
             ? CircularProgressIndicator()
-            : Text('Все персонажи загружены!'),
+            : Text('All characters loaded!'),
       ),
     );
   }
